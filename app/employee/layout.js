@@ -127,8 +127,8 @@ const toggleTheme = () => {
       <div className="relative z-10 flex min-h-screen">
 
         {/* Sidebar */}
-        <aside
-          className={`hidden md:flex w-[260px] shrink-0 flex-col border-r backdrop-blur-2xl ${
+ <aside
+  className={`hidden md:flex fixed left-0 top-0 h-screen w-[260px] z-50 flex-col border-r backdrop-blur-2xl ${
             dark
               ? "border-white/10 bg-white/[0.025]"
               : "border-black/10 bg-white/40"
@@ -312,7 +312,7 @@ const toggleTheme = () => {
         </aside>
 
         {/* Right Side */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 md:ml-[260px]">
 
           {/* Navbar */}
           <header
