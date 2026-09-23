@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="66" height="57" viewBox="0 0 66 57" fill="none">
+  <!-- Rounded app icon background -->
+  <rect x="7" y="2" width="52" height="53" rx="16"
+        fill="#FFFFFF" stroke="#E4E4E4" stroke-width="1.5"/>
+
+  <!-- Main shield/hexagonal mark -->
+  <path d="M33 10
+           L51 21
+           L51 39
+           L33 53
+           L13 38
+           L13 20
+           Z"
+        stroke="#111111" stroke-width="4.2"
+        stroke-linejoin="round"/>
+
+  <!-- Inner cut/mark -->
+  <path d="M20 39
+           L20 21
+           L36 21
+           C41 21 45 24 46 28
+           C46.5 30 45 32 42 34
+           L39 36
+           L49 45"
+        stroke="#111111" stroke-width="4.2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
