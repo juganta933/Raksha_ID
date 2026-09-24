@@ -486,7 +486,7 @@ export default function ConnectPage() {
                 <Link
                   href={
                     selectedRole === "admin"
-                      ? "/admin"
+                      ? "https://raksa-id.vercel.app/"
                       : "/employee"
                   }
                   className={`px-6 py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 hover:scale-[1.02] transition ${
