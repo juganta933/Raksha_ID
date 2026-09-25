@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -11,10 +12,18 @@ import {
   Wallet,
   LockKeyhole,
   ChevronRight,
+  UserRound,
+  Building2,
+  BriefcaseBusiness,
+  Fingerprint,
+  CircleDot,
+  KeyRound,
+  Laptop,
+  Activity,
 } from "lucide-react";
 
 const employee = {
-  name: "Rahul Sharma",
+  name: "Arun Deori",
   employeeId: "EMP-1024",
   department: "Engineering",
   designation: "Software Engineer",
@@ -74,461 +83,755 @@ const recentActivity = [
 export default function EmployeeDashboard() {
   const [dark, setDark] = useState(false);
 
- useEffect(() => {
+  useEffect(() => {
     const updateTheme = () => {
       setDark(localStorage.getItem("raksa-theme") === "dark");
     };
 
-    // Initial theme
     updateTheme();
 
-    // Listen for theme changes
     window.addEventListener("raksa-theme-change", updateTheme);
 
     return () => {
       window.removeEventListener("raksa-theme-change", updateTheme);
     };
   }, []);
+
+  const muted = dark ? "text-white/45" : "text-black/45";
+  const border = dark ? "border-white/10" : "border-black/10";
+
   return (
     <section
-      className={`px-5 md:px-8 lg:px-10 py-8 md:py-10 max-w-[1500px] mx-auto ${
-        dark ? "text-white" : "text-[#111]"
-      }`}
+      className={`
+        max-w-[1480px] mx-auto
+        px-5 md:px-8 lg:px-12
+        py-8 md:py-10
+        ${dark ? "text-white" : "text-[#191919]"}
+      `}
     >
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
-        <div>
-          <div
-            className={`flex items-center gap-2 text-xs mb-3 ${
-              dark ? "text-white/40" : "text-black/40"
-            }`}
-          >
-            <span>Employee Portal</span>
-            <ChevronRight size={13} />
-            <span>Dashboard</span>
-          </div>
+      {/* =========================================================
+          HEADER
+      ========================================================= */}
 
-          <h1 className="text-3xl md:text-5xl font-semibold tracking-[-0.04em]">
-            Welcome, {employee.name.split(" ")[0]}
-          </h1>
+      <header className="mb-10">
+        <div className={`flex items-center gap-2 text-xs mb-7 ${muted}`}>
+          <span>Employee Portal</span>
 
-          <p
-            className={`mt-3 text-sm md:text-base max-w-xl ${
-              dark ? "text-white/50" : "text-black/50"
-            }`}
-          >
-            Manage your verified identity, organization permissions,
-            and assigned digital assets.
-          </p>
+          <ChevronRight size={13} />
+
+          <span className={dark ? "text-white/70" : "text-black/70"}>
+            Dashboard
+          </span>
         </div>
 
-        {/* Identity Status */}
-        <div
-          className={`inline-flex items-center gap-3 self-start md:self-auto px-4 py-3 rounded-2xl border backdrop-blur-xl ${
-            dark
-              ? "border-white/10 bg-white/[0.04]"
-              : "border-black/10 bg-white/60"
-          }`}
-        >
-          <div
-            className={`w-9 h-9 rounded-xl flex items-center justify-center ${
-              dark ? "bg-white/[0.08]" : "bg-black/[0.05]"
-            }`}
-          >
-            <CheckCircle2 size={18} className="text-emerald-500" />
-          </div>
-
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-7">
           <div>
-            <div
-              className={`text-[10px] uppercase tracking-[0.15em] ${
-                dark ? "text-white/40" : "text-black/40"
-              }`}
+            <p
+              className={`
+                text-xs uppercase tracking-[0.16em] mb-3
+                ${dark ? "text-white/35" : "text-black/35"}
+              `}
             >
-              Identity
-            </div>
+              Personal workspace
+            </p>
 
-            <div className="text-sm font-medium mt-0.5">
-              Verified
-            </div>
+            <h1 className="text-3xl md:text-[42px] font-semibold tracking-[-0.045em] leading-none">
+              Welcome, {employee.name.split(" ")[0]}
+            </h1>
+
+            <p
+              className={`
+                mt-4 max-w-xl text-sm leading-6
+                ${muted}
+              `}
+            >
+              Your verified identity, organization permissions, and
+              assigned digital assets in one place.
+            </p>
           </div>
-        </div>
-      </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-        {stats.map((stat) => {
-          const Icon = stat.icon;
-
-          return (
-            <Link
-              key={stat.title}
-              href={stat.href}
-              className={`group relative overflow-hidden rounded-[24px] border backdrop-blur-2xl p-6 transition-all duration-500 hover:-translate-y-1 ${
+          {/* Wallet / identity */}
+          <div
+            className={`
+              flex items-center gap-3
+              px-3 py-2.5
+              rounded-xl
+              border
+              transition-all duration-300
+              hover:-translate-y-0.5
+              ${
                 dark
-                  ? "border-white/10 bg-white/[0.035] hover:border-white/20"
-                  : "border-black/10 bg-white/60 hover:border-black/20"
-              }`}
-            >
-              {/* Glow */}
-              <div
-                className={`absolute -right-16 -top-16 w-32 h-32 rounded-full blur-2xl pointer-events-none ${
-                  dark ? "bg-white/[0.04]" : "bg-black/[0.035]"
-                }`}
-              />
-
-              <div className="relative">
-                <div className="flex items-start justify-between">
-                  <div
-                    className={`w-11 h-11 rounded-2xl flex items-center justify-center ${
-                      dark ? "bg-white/[0.07]" : "bg-black/[0.05]"
-                    }`}
-                  >
-                    <Icon size={20} />
-                  </div>
-
-                  <ArrowUpRight
-                    size={18}
-                    className={`transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 ${
-                      dark ? "text-white/30" : "text-black/30"
-                    }`}
-                  />
-                </div>
-
-                <div className="mt-7">
-                  <div
-                    className={`text-sm ${
-                      dark ? "text-white/45" : "text-black/45"
-                    }`}
-                  >
-                    {stat.title}
-                  </div>
-
-                  <div className="text-2xl font-semibold tracking-tight mt-1">
-                    {stat.value}
-                  </div>
-
-                  <div
-                    className={`text-xs mt-2 ${
-                      dark ? "text-white/40" : "text-black/40"
-                    }`}
-                  >
-                    {stat.description}
-                  </div>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-
-      {/* Wallet */}
-      <div
-        className={`rounded-[24px] border backdrop-blur-2xl p-6 md:p-7 mb-6 ${
-          dark
-            ? "border-white/10 bg-white/[0.035]"
-            : "border-black/10 bg-white/60"
-        }`}
-      >
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
-          <div className="flex items-center gap-4">
+                  ? "border-white/10 bg-white/[0.035] hover:bg-white/[0.055]"
+                  : "border-black/10 bg-white/70 hover:bg-white"
+              }
+            `}
+          >
             <div
-              className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
-                dark ? "bg-white" : "bg-black"
-              }`}
+              className={`
+                w-8 h-8 rounded-lg
+                flex items-center justify-center
+                ${dark ? "bg-white text-black" : "bg-black text-white"}
+              `}
             >
-              <Wallet
-                size={21}
-                className={dark ? "text-black" : "text-white"}
-              />
+              <Wallet size={15} />
             </div>
 
             <div>
               <div
-                className={`text-xs uppercase tracking-[0.14em] ${
-                  dark ? "text-white/40" : "text-black/40"
-                }`}
+                className={`text-[10px] uppercase tracking-[0.12em] ${muted}`}
               >
-                Connected Wallet
+                Connected wallet
               </div>
 
-              <div className="font-medium mt-1">
+              <div className="text-xs font-medium mt-0.5">
                 {employee.wallet}
               </div>
             </div>
-          </div>
 
-          <div
-            className={`flex items-center gap-2 text-xs ${
-              dark ? "text-white/50" : "text-black/50"
-            }`}
-          >
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            Connected to Polygon
+            <span className="relative ml-2 w-2 h-2 rounded-full bg-emerald-500">
+              <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-30" />
+            </span>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Bottom Grid */}
-      <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-6">
-        {/* Recent Activity */}
+      {/* =========================================================
+          MAIN WORKSPACE
+      ========================================================= */}
+
+      <div className={`border-t ${border}`}>
+        {/* Identity workspace */}
+
         <div
-          className={`rounded-[28px] border backdrop-blur-2xl overflow-hidden ${
-            dark
-              ? "border-white/10 bg-white/[0.035]"
-              : "border-black/10 bg-white/60"
-          }`}
+          className={`
+            grid lg:grid-cols-[1.45fr_0.55fr]
+            border-b
+            ${border}
+          `}
         >
-          <div
-            className={`flex items-center justify-between px-6 py-6 border-b ${
-              dark ? "border-white/10" : "border-black/10"
-            }`}
-          >
-            <div>
-              <h2 className="font-semibold tracking-tight">
-                Recent Activity
-              </h2>
+          {/* Main identity */}
 
-              <p
-                className={`text-xs mt-1 ${
-                  dark ? "text-white/40" : "text-black/40"
-                }`}
-              >
-                Recent actions associated with your identity
-              </p>
-            </div>
-
-            <Link
-              href="/employee/activity"
-              className={`text-xs flex items-center gap-1 transition ${
+          <Link
+            href="/employee/identity"
+            className={`
+              group
+              py-8 lg:py-10 lg:pr-12
+              transition-all duration-400
+              ${
                 dark
-                  ? "text-white/50 hover:text-white"
-                  : "text-black/50 hover:text-black"
-              }`}
-            >
-              View all
-              <ArrowUpRight size={14} />
-            </Link>
-          </div>
-
-          <div
-            className={`divide-y ${
-              dark ? "divide-white/10" : "divide-black/10"
-            }`}
+                  ? "hover:bg-white/[0.025]"
+                  : "hover:bg-black/[0.018]"
+              }
+            `}
           >
-            {recentActivity.map((item, index) => {
-              const Icon = item.icon;
-
-              return (
+            <div className="flex items-start justify-between gap-6">
+              <div className="flex items-start gap-5">
                 <div
-                  key={index}
-                  className={`px-6 py-5 flex items-center gap-4 transition-colors duration-300 ${
-                    dark
-                      ? "hover:bg-white/[0.025]"
-                      : "hover:bg-black/[0.02]"
-                  }`}
+                  className={`
+                    w-14 h-14 shrink-0
+                    rounded-2xl
+                    flex items-center justify-center
+                    transition-all duration-400
+                    group-hover:scale-105
+                    group-hover:-rotate-2
+                    ${
+                      dark
+                        ? "bg-white/[0.07]"
+                        : "bg-black/[0.05]"
+                    }
+                  `}
                 >
-                  <div
-                    className={`w-10 h-10 shrink-0 rounded-xl flex items-center justify-center ${
-                      dark ? "bg-white/[0.06]" : "bg-black/[0.05]"
-                    }`}
-                  >
-                    <Icon size={17} />
-                  </div>
-
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm font-medium">
-                      {item.title}
-                    </div>
-
-                    <div
-                      className={`text-xs mt-1 truncate ${
-                        dark ? "text-white/40" : "text-black/40"
-                      }`}
-                    >
-                      {item.description}
-                    </div>
-                  </div>
-
-                  <div className="text-right shrink-0">
-                    <div
-                      className={`text-[11px] ${
-                        dark ? "text-white/40" : "text-black/40"
-                      }`}
-                    >
-                      {item.time}
-                    </div>
-
-                    <div className="flex items-center justify-end gap-1 mt-1 text-[10px] text-emerald-600 dark:text-emerald-400">
-                      <CheckCircle2 size={11} />
-                      {item.status}
-                    </div>
-                  </div>
+                  <Fingerprint size={25} strokeWidth={1.7} />
                 </div>
-              );
-            })}
-          </div>
-        </div>
 
-        {/* Identity Card */}
-        <div
-          className={`rounded-[28px] border overflow-hidden ${
-            dark
-              ? "border-white/10 bg-white/[0.055] text-white"
-              : "border-black/10 bg-white text-black"
-          }`}
-        >
-          <div className="p-6">
-            <div className="flex items-center justify-between mb-8">
-              <div
-                className={`w-11 h-11 rounded-2xl flex items-center justify-center ${
-                  dark ? "bg-white/[0.08]" : "bg-black/[0.05]"
-                }`}
-              >
-                <UserIcon />
+                <div>
+                  <div
+                    className={`
+                      text-xs uppercase tracking-[0.13em]
+                      ${muted}
+                    `}
+                  >
+                    Employee identity
+                  </div>
+
+                  <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.035em] mt-2">
+                    {employee.name}
+                  </h2>
+
+                  <p className={`text-sm mt-2 ${muted}`}>
+                    {employee.designation} · {employee.department}
+                  </p>
+                </div>
               </div>
 
-              <span className="px-3 py-1.5 rounded-full bg-emerald-400/10 text-emerald-600 dark:text-emerald-300 text-[10px] uppercase tracking-[0.12em]">
-                Verified
-              </span>
+              <ArrowUpRight
+                size={18}
+                className={`
+                  shrink-0
+                  transition-all duration-300
+                  group-hover:translate-x-1
+                  group-hover:-translate-y-1
+                  ${muted}
+                `}
+              />
             </div>
 
-            <div
-              className={`text-xs mb-2 ${
-                dark ? "text-white/40" : "text-black/40"
-              }`}
-            >
-              Employee Identity
-            </div>
+            {/* Identity metadata */}
 
-            <h2 className="text-2xl font-semibold tracking-tight">
-              {employee.name}
-            </h2>
-
-            <div
-              className={`text-sm mt-2 ${
-                dark ? "text-white/45" : "text-black/50"
-              }`}
-            >
-              {employee.designation}
-            </div>
-
-            <div className="mt-7 space-y-4">
-              <InfoRow
+            <div className="grid sm:grid-cols-3 gap-6 mt-10">
+              <MetaItem
+                icon={UserRound}
                 label="Employee ID"
                 value={employee.employeeId}
                 dark={dark}
               />
 
-              <InfoRow
-                label="Department"
-                value={employee.department}
-                dark={dark}
-              />
-
-              <InfoRow
+              <MetaItem
+                icon={Building2}
                 label="Organization"
                 value={employee.organization}
                 dark={dark}
               />
+
+              <MetaItem
+                icon={BriefcaseBusiness}
+                label="Department"
+                value={employee.department}
+                dark={dark}
+              />
+            </div>
+          </Link>
+
+          {/* Verification */}
+
+          <div
+            className={`
+              lg:border-l
+              py-8 lg:py-10 lg:pl-10
+              ${border}
+            `}
+          >
+            <div className="flex items-center justify-between">
+              <div
+                className={`
+                  text-xs uppercase tracking-[0.13em]
+                  ${muted}
+                `}
+              >
+                Verification
+              </div>
+
+              <CheckCircle2
+                size={17}
+                className="text-emerald-500"
+              />
+            </div>
+
+            <div className="mt-7">
+              <div className="flex items-center gap-2">
+                <span className="relative w-2 h-2 rounded-full bg-emerald-500">
+                  <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-30" />
+                </span>
+
+                <span className="text-sm font-medium">
+                  Identity verified
+                </span>
+              </div>
+
+              <p className={`text-xs leading-5 mt-3 ${muted}`}>
+                Your organization has verified this identity and
+                controls the associated access.
+              </p>
             </div>
 
             <Link
               href="/employee/identity"
-              className={`mt-7 w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium transition ${
-                dark
-                  ? "bg-white text-black hover:bg-white/90"
-                  : "bg-black text-white hover:bg-black/90"
-              }`}
+              className={`
+                inline-flex items-center gap-1.5
+                text-xs font-medium
+                mt-8
+                transition-all duration-300
+                ${
+                  dark
+                    ? "text-white/60 hover:text-white"
+                    : "text-black/50 hover:text-black"
+                }
+              `}
             >
-              View Identity
-              <ArrowUpRight size={15} />
+              View identity
+
+              <ArrowUpRight
+                size={13}
+                className="transition-transform duration-300 group-hover:translate-x-0.5"
+              />
             </Link>
+          </div>
+        </div>
+
+        {/* =========================================================
+            ACCESS + ASSETS
+        ========================================================= */}
+
+        <div
+          className={`
+            grid lg:grid-cols-2
+            border-b
+            ${border}
+          `}
+        >
+          {/* Permissions */}
+
+          <Link
+            href="/employee/permissions"
+            className={`
+              group
+              py-8 lg:py-10
+              lg:pr-12
+              transition-all duration-400
+              ${
+                dark
+                  ? "hover:bg-white/[0.025]"
+                  : "hover:bg-black/[0.018]"
+              }
+            `}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div
+                  className={`
+                    w-9 h-9 rounded-xl
+                    flex items-center justify-center
+                    ${dark ? "bg-white/[0.07]" : "bg-black/[0.05]"}
+                  `}
+                >
+                  <KeyRound size={17} />
+                </div>
+
+                <div>
+                  <div className="text-sm font-medium">
+                    Active Permissions
+                  </div>
+
+                  <div className={`text-xs mt-0.5 ${muted}`}>
+                    Access currently assigned to you
+                  </div>
+                </div>
+              </div>
+
+              <ArrowUpRight
+                size={17}
+                className={`
+                  transition-all duration-300
+                  group-hover:translate-x-1
+                  group-hover:-translate-y-1
+                  ${muted}
+                `}
+              />
+            </div>
+
+            <div className="mt-8 flex items-end gap-4">
+              <span className="text-4xl font-semibold tracking-[-0.05em]">
+                5
+              </span>
+
+              <span className={`text-xs pb-1 ${muted}`}>
+                active permissions
+              </span>
+            </div>
+
+            <div className="mt-7 flex gap-2">
+              <PermissionTag text="READ" dark={dark} />
+              <PermissionTag text="WRITE" dark={dark} />
+              <PermissionTag text="PORTAL" dark={dark} />
+            </div>
+          </Link>
+
+          {/* Assets */}
+
+          <Link
+            href="/employee/assets"
+            className={`
+              group
+              py-8 lg:py-10
+              lg:pl-12
+              border-t lg:border-t-0 lg:border-l
+              ${border}
+              transition-all duration-400
+              ${
+                dark
+                  ? "hover:bg-white/[0.025]"
+                  : "hover:bg-black/[0.018]"
+              }
+            `}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div
+                  className={`
+                    w-9 h-9 rounded-xl
+                    flex items-center justify-center
+                    ${dark ? "bg-white/[0.07]" : "bg-black/[0.05]"}
+                  `}
+                >
+                  <Boxes size={17} />
+                </div>
+
+                <div>
+                  <div className="text-sm font-medium">
+                    Digital Assets
+                  </div>
+
+                  <div className={`text-xs mt-0.5 ${muted}`}>
+                    Assets assigned to your identity
+                  </div>
+                </div>
+              </div>
+
+              <ArrowUpRight
+                size={17}
+                className={`
+                  transition-all duration-300
+                  group-hover:translate-x-1
+                  group-hover:-translate-y-1
+                  ${muted}
+                `}
+              />
+            </div>
+
+            <div className="mt-7 space-y-1">
+              <AssetRow
+                icon={Laptop}
+                name="Laptop XYZ"
+                type="NFT Asset"
+                dark={dark}
+              />
+
+              <AssetRow
+                icon={Boxes}
+                name="Digital Asset"
+                type="Assigned"
+                dark={dark}
+              />
+
+              <AssetRow
+                icon={Boxes}
+                name="Digital Asset"
+                type="Assigned"
+                dark={dark}
+              />
+            </div>
+
+            <div className={`text-xs mt-5 ${muted}`}>
+              3 assets assigned
+            </div>
+          </Link>
+        </div>
+
+        {/* =========================================================
+            ACTIVITY
+        ========================================================= */}
+
+        <div className="grid lg:grid-cols-[1.35fr_0.65fr]">
+          {/* Activity */}
+
+          <div className="py-8 lg:py-10 lg:pr-12">
+            <div className="flex items-center justify-between mb-7">
+              <div>
+                <div className="flex items-center gap-2">
+                  <Activity size={16} />
+
+                  <h2 className="text-sm font-semibold">
+                    Recent Activity
+                  </h2>
+                </div>
+
+                <p className={`text-xs mt-1 ${muted}`}>
+                  Recent actions associated with your identity
+                </p>
+              </div>
+
+              <Link
+                href="/employee/activity"
+                className={`
+                  text-xs flex items-center gap-1
+                  transition-colors duration-300
+                  ${
+                    dark
+                      ? "text-white/45 hover:text-white"
+                      : "text-black/45 hover:text-black"
+                  }
+                `}
+              >
+                View all
+                <ArrowUpRight size={13} />
+              </Link>
+            </div>
+
+            <div>
+              {recentActivity.map((item, index) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={index}
+                    className={`
+                      group flex items-start gap-4
+                      py-4
+                      border-t
+                      ${border}
+                      transition-all duration-300
+                      ${
+                        dark
+                          ? "hover:bg-white/[0.02]"
+                          : "hover:bg-black/[0.015]"
+                      }
+                    `}
+                  >
+                    <div
+                      className={`
+                        mt-0.5 w-8 h-8 shrink-0
+                        rounded-lg
+                        flex items-center justify-center
+                        transition-transform duration-300
+                        group-hover:scale-105
+                        ${
+                          dark
+                            ? "bg-white/[0.06]"
+                            : "bg-black/[0.045]"
+                        }
+                      `}
+                    >
+                      <Icon size={15} />
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-medium">
+                        {item.title}
+                      </div>
+
+                      <div className={`text-xs mt-1 ${muted}`}>
+                        {item.description}
+                      </div>
+                    </div>
+
+                    <div className="text-right shrink-0">
+                      <div className={`text-[10px] ${muted}`}>
+                        {item.time}
+                      </div>
+
+                      <div className="flex items-center justify-end gap-1 mt-1 text-[9px] text-emerald-600 dark:text-emerald-400">
+                        <CircleDot size={9} />
+                        {item.status}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Security */}
+
+          <div
+            className={`
+              lg:border-l
+              py-8 lg:py-10
+              lg:pl-12
+              ${border}
+            `}
+          >
+            <div className="flex items-center gap-2">
+              <LockKeyhole size={16} />
+
+              <h2 className="text-sm font-semibold">
+                Access control
+              </h2>
+            </div>
+
+            <div className="mt-6">
+              <div className="flex items-center gap-2">
+                <ShieldCheck
+                  size={16}
+                  className="text-emerald-500"
+                />
+
+                <span className="text-sm font-medium">
+                  Read-only access
+                </span>
+              </div>
+
+              <p className={`text-xs leading-5 mt-3 ${muted}`}>
+                Your organization controls your identity,
+                permissions, and assigned assets.
+              </p>
+
+              <div
+                className={`
+                  mt-6 pt-5 border-t
+                  ${border}
+                `}
+              >
+                <div className={`text-[10px] uppercase tracking-[0.12em] ${muted}`}>
+                  Asset transfers
+                </div>
+
+                <div className="text-sm font-medium mt-2">
+                  Restricted
+                </div>
+              </div>
+
+              <div
+                className={`
+                  mt-5 pt-5 border-t
+                  ${border}
+                `}
+              >
+                <div className={`text-[10px] uppercase tracking-[0.12em] ${muted}`}>
+                  Permission changes
+                </div>
+
+                <div className="text-sm font-medium mt-2">
+                  Organization controlled
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Security Notice */}
+      {/* Small footer status */}
+
       <div
-        className={`mt-6 rounded-[22px] border backdrop-blur-xl px-5 py-4 flex items-start gap-3 ${
-          dark
-            ? "border-white/10 bg-white/[0.025]"
-            : "border-black/10 bg-white/40"
-        }`}
+        className={`
+          flex items-center justify-between
+          pt-6 text-[10px]
+          ${muted}
+        `}
       >
-        <LockKeyhole
-          size={17}
-          className={`mt-0.5 shrink-0 ${
-            dark ? "text-white/40" : "text-black/40"
-          }`}
-        />
-
-        <div>
-          <div className="text-xs font-medium">
-            Employee access is read-only
-          </div>
-
-          <p
-            className={`text-xs mt-1 leading-5 ${
-              dark ? "text-white/40" : "text-black/40"
-            }`}
-          >
-            Your organization controls your identity, permissions,
-            and assigned assets. You can view these resources but
-            cannot modify or transfer them.
-          </p>
+        <div className="flex items-center gap-2">
+          <span className="relative w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          Raksa ID · Employee workspace
         </div>
+
+        <div>Connected to Polygon</div>
       </div>
     </section>
   );
 }
 
-/* Small reusable components */
+/* =========================================================
+   SMALL COMPONENTS
+========================================================= */
 
-function InfoRow({ label, value, dark }) {
+function MetaItem({ icon: Icon, label, value, dark }) {
   return (
-    <div className="flex items-center justify-between gap-4">
-      <span
-        className={`text-xs ${
-          dark ? "text-white/35" : "text-black/40"
-        }`}
-      >
-        {label}
-      </span>
+    <div className="flex items-start gap-3">
+      <Icon
+        size={15}
+        className={dark ? "text-white/35" : "text-black/35"}
+      />
 
-      <span
-        className={`text-xs text-right ${
-          dark ? "text-white/75" : "text-black/70"
-        }`}
-      >
-        {value}
-      </span>
+      <div>
+        <div
+          className={`
+            text-[10px]
+            uppercase
+            tracking-[0.12em]
+            ${dark ? "text-white/35" : "text-black/35"}
+          `}
+        >
+          {label}
+        </div>
+
+        <div className="text-xs font-medium mt-1">
+          {value}
+        </div>
+      </div>
     </div>
   );
 }
 
-function UserIcon() {
+function PermissionTag({ text, dark }) {
   return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+    <span
+      className={`
+        px-2.5 py-1.5
+        rounded-lg
+        text-[9px]
+        tracking-[0.08em]
+        border
+        transition-all duration-300
+        hover:-translate-y-0.5
+        ${
+          dark
+            ? "border-white/10 bg-white/[0.04] text-white/55 hover:bg-white/[0.08]"
+            : "border-black/10 bg-black/[0.025] text-black/50 hover:bg-black/[0.05]"
+        }
+      `}
     >
-      <circle
-        cx="12"
-        cy="8"
-        r="3.5"
-        stroke="currentColor"
-        strokeWidth="1.7"
-      />
-
-      <path
-        d="M5 20C5.7 16.5 8.1 14.5 12 14.5C15.9 14.5 18.3 16.5 19 20"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-      />
-    </svg>
+      {text}
+    </span>
   );
 }
+
+function AssetRow({ icon: Icon, name, type, dark }) {
+  return (
+    <div
+      className={`
+        group/asset
+        flex items-center gap-3
+        py-3
+        border-t
+        ${
+          dark
+            ? "border-white/10"
+            : "border-black/10"
+        }
+      `}
+    >
+      <div
+        className={`
+          w-8 h-8 rounded-lg
+          flex items-center justify-center
+          transition-all duration-300
+          group-hover/asset:scale-105
+          ${
+            dark
+              ? "bg-white/[0.06]"
+              : "bg-black/[0.045]"
+          }
+        `}
+      >
+        <Icon size={14} />
+      </div>
+
+      <div className="flex-1">
+        <div className="text-xs font-medium">
+          {name}
+        </div>
+
+        <div
+          className={`
+            text-[10px] mt-0.5
+            ${dark ? "text-white/35" : "text-black/35"}
+          `}
+        >
+          {type}
+        </div>
+      </div>
+
+      <ArrowUpRight
+        size={13}
+        className={`
+          transition-all duration-300
+          opacity-0
+          group-hover/asset:opacity-100
+          group-hover/asset:translate-x-0.5
+          group-hover/asset:-translate-y-0.5
+          ${dark ? "text-white/40" : "text-black/40"}
+        `}
+      />
+    </div>
+  );
+}
+

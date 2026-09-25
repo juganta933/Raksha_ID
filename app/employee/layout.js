@@ -127,189 +127,488 @@ const toggleTheme = () => {
       <div className="relative z-10 flex min-h-screen">
 
         {/* Sidebar */}
- <aside
-  className={`hidden md:flex fixed left-0 top-0 h-screen w-[260px] z-50 flex-col border-r backdrop-blur-2xl ${
+ ```jsx
+{/* =========================================================
+    SMOOTH SIDEBAR
+========================================================= */}
+
+<aside
+  className={`
+    hidden md:flex fixed left-0 top-0 h-screen
+    w-[236px] z-50 flex-col
+    border-r
+    backdrop-blur-2xl
+    transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)]
+    ${
+      dark
+        ? "border-white/[0.07] bg-[#090909]/80"
+        : "border-black/[0.07] bg-[#f7f7f5]/80"
+    }
+  `}
+>
+  {/* =====================================================
+      LOGO
+  ===================================================== */}
+
+  <div className="px-4 pt-5 pb-4">
+    <Link
+      href="/"
+      className="
+        group flex items-center gap-3
+        px-2 py-2
+        rounded-xl
+        transition-all duration-300
+        hover:-translate-y-0.5
+      "
+    >
+      {/* Logo */}
+
+      <div
+        className={`
+          relative w-9 h-9 shrink-0
+          rounded-[11px]
+          flex items-center justify-center
+          transition-all duration-500
+          group-hover:scale-105
+          group-hover:rotate-1
+          ${
             dark
-              ? "border-white/10 bg-white/[0.025]"
-              : "border-black/10 bg-white/40"
-          }`}
+              ? "bg-white text-black"
+              : "bg-black text-white"
+          }
+        `}
+      >
+        {/* subtle glow */}
+
+        <div
+          className={`
+            absolute inset-0 rounded-[11px]
+            blur-lg opacity-0
+            transition-opacity duration-500
+            group-hover:opacity-30
+            ${
+              dark
+                ? "bg-white"
+                : "bg-black"
+            }
+          `}
+        />
+
+        <svg
+          viewBox="0 0 48 48"
+          className="relative w-7 h-7 transition-transform duration-500 group-hover:scale-105"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
+          <path
+            d="M24 4L39 12V29L24 44L9 29V12L24 4Z"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinejoin="round"
+          />
 
-          {/* Logo */}
-          <div className="px-6 py-6">
-            <Link
-              href="/"
-              className="flex items-center gap-3 group"
+          <path
+            d="M17 32V16H24.5C29 16 31.5 18.1 31.5 21.4C31.5 24.2 29.8 26 27.2 26.7L33 32"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          <circle
+            cx="35"
+            cy="13"
+            r="2.5"
+            fill="currentColor"
+          />
+
+          <path
+            d="M28 26L35 19"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+
+      {/* Brand */}
+
+      <div className="min-w-0">
+        <div
+          className="
+            font-semibold tracking-[-0.02em]
+            leading-none
+            transition-transform duration-300
+            group-hover:translate-x-0.5
+          "
+        >
+          RAKSA
+        </div>
+
+        <div
+          className={`
+            text-[9px]
+            tracking-[0.2em]
+            mt-1
+            ${
+              dark
+                ? "text-white/35"
+                : "text-black/35"
+            }
+          `}
+        >
+          EMPLOYEE
+        </div>
+      </div>
+    </Link>
+  </div>
+
+  {/* =====================================================
+      NAVIGATION
+  ===================================================== */}
+
+  <nav className="flex-1 px-3 pt-3">
+    {/* Section label */}
+
+    <div
+      className={`
+        px-3 mb-2
+        text-[9px]
+        uppercase
+        tracking-[0.18em]
+        ${
+          dark
+            ? "text-white/25"
+            : "text-black/30"
+        }
+      `}
+    >
+      Workspace
+    </div>
+
+    <div className="space-y-0.5">
+      {navigation.map((item) => {
+        const Icon = item.icon;
+        const active = isActive(item.href);
+
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={`
+              group relative
+              flex items-center gap-3
+              px-3 py-2.5
+              rounded-[10px]
+              text-[13px]
+              font-medium
+              transition-all
+              duration-300
+              ease-[cubic-bezier(.22,1,.36,1)]
+              ${
+                active
+                  ? dark
+                    ? "bg-white/[0.08] text-white"
+                    : "bg-black/[0.055] text-black"
+                  : dark
+                    ? "text-white/45 hover:text-white/85 hover:bg-white/[0.035]"
+                    : "text-black/45 hover:text-black/85 hover:bg-black/[0.025]"
+              }
+            `}
+          >
+            {/* Active indicator */}
+
+            <span
+              className={`
+                absolute left-0
+                top-1/2
+                -translate-y-1/2
+                w-[2px]
+                rounded-full
+                transition-all duration-300
+                ${
+                  active
+                    ? dark
+                      ? "h-5 bg-white"
+                      : "h-5 bg-black"
+                    : "h-0 bg-transparent"
+                }
+              `}
+            />
+
+            {/* Icon container */}
+
+            <span
+              className={`
+                relative
+                w-7 h-7
+                shrink-0
+                rounded-[8px]
+                flex items-center justify-center
+                transition-all duration-300
+                ${
+                  active
+                    ? dark
+                      ? "bg-white/[0.08]"
+                      : "bg-black/[0.055]"
+                    : ""
+                }
+                group-hover:scale-105
+                ${
+                  active
+                    ? "scale-[1.02]"
+                    : ""
+                }
+              `}
             >
-              <div
-                className={`w-9 h-9 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105 ${
-                  dark ? "bg-white" : "bg-black"
-                }`}
-              >
-                <svg
-                  viewBox="0 0 48 48"
-                  className={`w-7 h-7 ${
-                    dark ? "text-black" : "text-white"
-                  }`}
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M24 4L39 12V29L24 44L9 29V12L24 4Z"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinejoin="round"
-                  />
+              <Icon
+                size={16}
+                strokeWidth={active ? 2 : 1.7}
+                className={`
+                  transition-all duration-300
+                  ${
+                    active
+                      ? dark
+                        ? "text-white"
+                        : "text-black"
+                      : ""
+                  }
+                  group-hover:scale-110
+                  ${
+                    active
+                      ? "group-hover:-translate-y-0.5"
+                      : ""
+                  }
+                `}
+              />
+            </span>
 
-                  <path
-                    d="M17 32V16H24.5C29 16 31.5 18.1 31.5 21.4C31.5 24.2 29.8 26 27.2 26.7L33 32"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+            {/* Label */}
 
-                  <circle
-                    cx="35"
-                    cy="13"
-                    r="2.5"
-                    fill="currentColor"
-                  />
+            <span
+              className="
+                flex-1
+                transition-transform
+                duration-300
+                group-hover:translate-x-0.5
+              "
+            >
+              {item.name}
+            </span>
 
-                  <path
-                    d="M28 26L35 19"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </div>
+            {/* Active arrow */}
 
-              <div>
-                <div className="font-semibold tracking-tight">
-                  RAKSA
-                </div>
+            <ChevronRight
+              size={13}
+              className={`
+                transition-all duration-300
+                ${
+                  active
+                    ? "opacity-50 translate-x-0"
+                    : "opacity-0 -translate-x-1"
+                }
+                group-hover:opacity-70
+              `}
+            />
+          </Link>
+        );
+      })}
+    </div>
+  </nav>
 
-                <div
-                  className={`text-[10px] tracking-[0.18em] ${
-                    dark
-                      ? "text-white/40"
-                      : "text-black/40"
-                  }`}
-                >
-                  EMPLOYEE
-                </div>
-              </div>
-            </Link>
-          </div>
+  {/* =====================================================
+      BOTTOM AREA
+  ===================================================== */}
 
-          {/* Navigation */}
-          <nav className="flex-1 px-4 py-4">
-            <div
-              className={`text-[10px] uppercase tracking-[0.18em] px-3 mb-3 ${
+  <div className="px-3 pb-4">
+
+    {/* Wallet */}
+
+    <div
+      className={`
+        group
+        px-3 py-3
+        mb-2
+        rounded-xl
+        border
+        transition-all duration-300
+        ${
+          dark
+            ? "border-white/[0.07] hover:border-white/[0.12] hover:bg-white/[0.025]"
+            : "border-black/[0.07] hover:border-black/[0.12] hover:bg-black/[0.015]"
+        }
+      `}
+    >
+      <div className="flex items-center gap-3">
+
+        <div
+          className={`
+            w-8 h-8
+            shrink-0
+            rounded-lg
+            flex items-center justify-center
+            transition-all duration-300
+            group-hover:scale-105
+            ${
+              dark
+                ? "bg-white/[0.07]"
+                : "bg-black/[0.045]"
+            }
+          `}
+        >
+          <Wallet
+            size={15}
+            className={`
+              transition-transform duration-300
+              group-hover:scale-110
+              ${
                 dark
-                  ? "text-white/35"
+                  ? "text-white/70"
+                  : "text-black/65"
+              }
+            `}
+          />
+        </div>
+
+        <div className="min-w-0 flex-1">
+
+          <div
+            className={`
+              text-[9px]
+              uppercase
+              tracking-[0.12em]
+              ${
+                dark
+                  ? "text-white/30"
                   : "text-black/35"
-              }`}
-            >
-              Workspace
-            </div>
-
-            <div className="space-y-1">
-              {navigation.map((item) => {
-                const Icon = item.icon;
-                const active = isActive(item.href);
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`group flex items-center gap-3 px-3 py-3 rounded-xl text-sm transition-all duration-300 ${
-                      active
-                        ? dark
-                          ? "bg-white text-black shadow-sm"
-                          : "bg-black text-white shadow-sm"
-                        : dark
-                          ? "text-white/55 hover:text-white hover:bg-white/[0.06]"
-                          : "text-black/55 hover:text-black hover:bg-black/[0.04]"
-                    }`}
-                  >
-                    <Icon
-                      size={17}
-                      strokeWidth={1.8}
-                    />
-
-                    <span className="flex-1">
-                      {item.name}
-                    </span>
-
-                    {active && (
-                      <ChevronRight
-                        size={15}
-                        className="opacity-60"
-                      />
-                    )}
-                  </Link>
-                );
-              })}
-            </div>
-          </nav>
-
-          {/* Bottom Sidebar */}
-          <div className="p-4 space-y-2">
-
-            {/* Wallet */}
-            <div
-              className={`rounded-2xl border backdrop-blur-xl p-4 ${
-                dark
-                  ? "border-white/10 bg-white/[0.035]"
-                  : "border-black/10 bg-white/50"
-              }`}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <Wallet size={15} />
-
-                <span
-                  className={`text-xs ${
-                    dark
-                      ? "text-white/50"
-                      : "text-black/50"
-                  }`}
-                >
-                  Connected Wallet
-                </span>
-              </div>
-
-              <div className="text-sm font-medium">
-                0xA821...91F2
-              </div>
-
-              <div
-                className={`flex items-center gap-1.5 mt-2 text-[11px] ${
-                  dark
-                    ? "text-white/45"
-                    : "text-black/45"
-                }`}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                Polygon
-              </div>
-            </div>
-
-            {/* Logout */}
-            <button
-              onClick={handleLogout}
-              className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm transition-all duration-300 ${
-                dark
-                  ? "text-white/50 hover:text-white hover:bg-white/[0.06]"
-                  : "text-black/50 hover:text-black hover:bg-black/[0.04]"
-              }`}
-            >
-              <LogOut size={17} />
-              Disconnect
-            </button>
+              }
+            `}
+          >
+            Wallet
           </div>
-        </aside>
+
+          <div
+            className="
+              text-[11px]
+              font-medium
+              mt-1
+              truncate
+            "
+          >
+            0xA821...91F2
+          </div>
+        </div>
+
+        {/* Connected indicator */}
+
+        <div className="relative shrink-0">
+          <span className="block w-1.5 h-1.5 rounded-full bg-emerald-500" />
+
+          <span
+            className="
+              absolute inset-0
+              rounded-full
+              bg-emerald-500
+              animate-ping
+              opacity-25
+            "
+          />
+        </div>
+      </div>
+
+      <div
+        className={`
+          flex items-center gap-1.5
+          mt-2.5
+          text-[10px]
+          ${
+            dark
+              ? "text-white/30"
+              : "text-black/35"
+          }
+        `}
+      >
+        <span>Connected to Polygon</span>
+      </div>
+    </div>
+
+    {/* Bottom controls */}
+
+    <div className="grid grid-cols-[1fr_auto] gap-1">
+
+      {/* Disconnect */}
+
+      <button
+        onClick={handleLogout}
+        className={`
+          group/logout
+          flex items-center gap-3
+          px-3 py-2.5
+          rounded-[10px]
+          text-xs
+          transition-all duration-300
+          ${
+            dark
+              ? "text-white/40 hover:text-white hover:bg-white/[0.045]"
+              : "text-black/40 hover:text-black hover:bg-black/[0.035]"
+          }
+        `}
+      >
+        <LogOut
+          size={15}
+          className="
+            transition-transform duration-300
+            group-hover/logout:-translate-x-0.5
+          "
+        />
+
+        <span>Disconnect</span>
+      </button>
+
+      {/* Theme */}
+
+      <button
+        onClick={toggleTheme}
+        aria-label="Toggle theme"
+        className={`
+          group/theme
+          w-9 h-9
+          flex items-center justify-center
+          rounded-[10px]
+          border
+          transition-all duration-300
+          hover:scale-105
+          active:scale-95
+          ${
+            dark
+              ? "border-white/[0.08] bg-white/[0.035] hover:bg-white/[0.07]"
+              : "border-black/[0.08] bg-white/60 hover:bg-black/[0.035]"
+          }
+        `}
+      >
+        {dark ? (
+          <Sun
+            size={15}
+            className="
+              transition-all duration-500
+              group-hover/theme:rotate-45
+            "
+          />
+        ) : (
+          <Moon
+            size={15}
+            className="
+              transition-all duration-500
+              group-hover/theme:-rotate-12
+            "
+          />
+        )}
+      </button>
+    </div>
+  </div>
+</aside>
+
+
 
         {/* Right Side */}
         <div className="flex-1 min-w-0 md:ml-[260px]">
