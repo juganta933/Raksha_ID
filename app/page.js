@@ -154,38 +154,13 @@ export default function Home() {
                   : "border-black/10 bg-white"
               }`}
             >
-              <svg
-                viewBox="0 0 48 48"
-                className="h-7 w-7"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M24 4L39 12V29L24 44L9 29V12L24 4Z"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M17 32V16H24.5C29 16 31.5 18.1 31.5 21.4C31.5 24.2 29.8 26 27.2 26.7L33 32"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <circle
-                  cx="35"
-                  cy="13"
-                  r="2.5"
-                  fill="currentColor"
-                />
-                <path
-                  d="M28 26L35 19"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
+              {<div className="h-7 w-7">
+  <img
+    src={dark ? "/logo-white.png" : "/logo-black.png"}
+    alt="Raksa ID"
+    className="h-7 w-7 object-contain"
+  />
+</div>}
             </div>
 
             <div className="flex items-baseline gap-1">
@@ -367,41 +342,11 @@ export default function Home() {
                   : "border-black/[0.08] bg-white"
               }`}
             >
-              <svg
-                viewBox="0 0 48 48"
-                className="h-14 w-14 transition-transform duration-500 group-hover:scale-110"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M24 4L39 12V29L24 44L9 29V12L24 4Z"
-                  stroke="currentColor"
-                  strokeWidth="2.8"
-                  strokeLinejoin="round"
-                />
-
-                <path
-                  d="M17 32V16H24.5C29 16 31.5 18.1 31.5 21.4C31.5 24.2 29.8 26 27.2 26.7L33 32"
-                  stroke="currentColor"
-                  strokeWidth="2.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-
-                <circle
-                  cx="35"
-                  cy="13"
-                  r="2.5"
-                  fill="currentColor"
-                />
-
-                <path
-                  d="M28 26L35 19"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
+       <img
+  src={dark ? "/logo-white.png" : "/logo-black.png"}
+  alt="Raksa ID"
+  className="h-14 w-14 object-contain transition-transform duration-500 group-hover:scale-110"
+/>
 
               <span className="absolute inset-0 rounded-[28px] ring-1 ring-black/0 transition-all duration-500 group-hover:ring-black/10" />
             </div>
