@@ -19,12 +19,12 @@ import {
 } from "lucide-react";
 
 const employee = {
-  name: "Rahul Sharma",
+  name: "Arun Deori",
   employeeId: "EMP-1024",
   department: "Engineering",
   designation: "Software Engineer",
   organization: "XYZ Corporation",
-  email: "rahul.sharma@xyzcorp.com",
+  email: "arundeori@xyzcorp.com",
   wallet: "0xA821...91F2",
   fullWallet: "0xA8219C72F4B8D3E6A21F8C44D6B291F2",
   identityStatus: "Verified",
