@@ -119,43 +119,11 @@ export default function ConnectPage() {
                 : "bg-black"
             }`}
           >
-            <svg
-              viewBox="0 0 48 48"
-              className={`h-6 w-6 ${
-                dark ? "text-black" : "text-white"
-              }`}
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M24 4L39 12V29L24 44L9 29V12L24 4Z"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinejoin="round"
-              />
-
-              <path
-                d="M17 32V16H24.5C29 16 31.5 18.1 31.5 21.4C31.5 24.2 29.8 26 27.2 26.7L33 32"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-
-              <circle
-                cx="35"
-                cy="13"
-                r="2.5"
-                fill="currentColor"
-              />
-
-              <path
-                d="M28 26L35 19"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
+           <img
+  src={dark ? "/logo-black.png" : "/logo-white.png"}
+  alt="Raksa ID"
+  className="h-6 w-6 object-contain"
+/>
           </div>
 
           <span className="font-semibold tracking-tight">
